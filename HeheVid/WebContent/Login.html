@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 登录系统 </title>
+	<style type="text/css">
+		@import "css/Login.css";
+	</style>
+</head>
+<body>
+	<div class="div_Change">
+		<div class="div_top">
+			<div style="margin:0 auto">Enter Your Account And Password</div>
+		</div>
+		<div>
+			Your Account<br/>
+			<input type="text" id="Account"/><br/><br/>
+			
+		</div>
+		<div >
+			Your Password<br/>
+			<input type="password" id="Password"/><br/><br/>
+		</div>
+		<div>
+			<span>
+				<input style="width:80px" type="button" value="Login" onclick="Login()" />
+			</span>
+			<span>
+				<input style="width:80px" type="button" value="Register" onclick="Register()"/>
+			</span>
+		</div>
+	</div>
+</body>
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+<script>
+
+function Login(){
+	
+	var Account = $("#Account").val();
+	var Password = $("#Password").val();
+	var url = 'Login';
+	if(Account==""||Password=="")
+	{
+		alert("请输入账号或者密码！");
+		return ;
+	}
+	$.ajax({
+	    type:"get",  //请求方式
+	    url: url,     //请求地址
+	    data: {"Account":Account,"Password":Password},  //请求参数
+	    cache: false,   //去除缓存
+	    async : false,   //同步
+	    dataType: "JSON",
+	    success: function (data ,textStatus, jqXHR)
+	    {
+	    	var d = data.data;
+	    	//请求成功之后，后台数据赋值给data参数
+			for(var i = 0; i < d.length; i++){
+				if(Account == d[i]["userName"] && Password == d[i]["Pwd"])
+		    	{
+					
+					alert("登陆成功！");
+					window.location.href="index.html";
+					return ;
+		    	}
+			}
+    		alert("账号或密码错误！");
+	    },
+	    error:function (XMLHttpRequest, textStatus, errorThrown) {      
+	      	//请求失败之后执行这个
+	    	alert("请求失败了");
+	    }
+	 });	
+	}
+function Register(){
+	window.location.href="Register.html";
+}
+</script>
+</html>

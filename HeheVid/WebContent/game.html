@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    
+    <title>hehevideo.com</title>
+    <meta charset="utf-8">
+	<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+    
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript">
+$(function(){
+	var url = 'ShowVideoServlet';//发送请求的地址 
+	$.ajax({
+	    type:"post",  //请求方式，默认为get
+	    //timeout 要求为number类型参数，设置请求超时时间（毫秒）
+	    url: url,     //请求地址
+	    data: {"typeid":5},  //请求参数
+	    cache: false,   //去除缓存
+	    async : false,   //同步
+	    //async默认为true 所有请求均为异步，同步请求为false
+	// 	    dataType: "JSON",
+	    success: function (data ,textStatus, jqXHR)
+	    {
+	    	//请求成功之后，后台数据赋值给data参数
+	    	viewList(data.data);
+	    
+	    },
+	    error:function (XMLHttpRequest, textStatus, errorThrown) {      
+	      	//请求失败之后执行这个
+	    	alert("请求失败了");
+	    	alert(textStatus);
+	    	alert(errorThrown);
+	    }
+	 });
+	
+});
+
+//数据显示部分
+function viewList(data){
+	var url="http://39.97.101.71/";
+	var html = '';
+
+		for(var i = 0; i < data.length; i++){
+			html += ' <div class="card">'
+			html += '<a href="single.html?id='+data[i]['videoId']+'"><video controls style="width:100%; height:100%;object-fit:fill;"><source id="'+data[i]['videoId']+'" src='+url + data[i]['videoUrl'] + '/></video></a>';
+		html += '<center><span><b>'+data[i]['videoName']+'</b><br/></span><centers>';
+			html += '</div>'
+		}
+	$('.card-columns').empty().append(html);//数据绑定
+}
+</script>
+
+  </head>
+  <body>
+    
+    <aside class="probootstrap-aside js-probootstrap-aside">
+      <a href="#" class="probootstrap-close-menu js-probootstrap-close-menu d-md-none"><span class="oi oi-arrow-left"></span> Close</a>
+      <div class="probootstrap-site-logo probootstrap-animate" data-animate-effect="fadeInLeft">
+        
+        <a href="index.html" class="mb-2 d-block probootstrap-logo">Hehe Video</a>
+        <p class="mb-0"> video sharing site. </p>
+      </div>
+      <div class="probootstrap-overflow">
+        <nav class="probootstrap-nav">
+          <ul>
+            <li class="probootstrap-animate" data-animate-effect="fadeInLeft"><a href="index.html">全部</a></li>
+            <li class="probootstrap-animate" data-animate-effect="fadeInLeft"><a href="sports.html">体育</a></li>
+            <li class="probootstrap-animate" data-animate-effect="fadeInLeft"><a href="funny.html">搞笑</a></li>
+            <li class="probootstrap-animate" data-animate-effect="fadeInLeft"><a href="comic.html">动漫</a></li>
+            <li class="probootstrap-animate active" data-animate-effect="fadeInLeft"><a href="game.html">游戏</a></li>
+            <li class="probootstrap-animate" data-animate-effect="fadeInLeft"><a href="beauty.html">美女</a></li>
+            <li class="probootstrap-animate" data-animate-effect="fadeInLeft"><a href="movie.html">影视</a></li>
+          </ul>
+        </nav>
+        <footer class="probootstrap-aside-footer probootstrap-animate" data-animate-effect="fadeInLeft">
+          <ul class="list-unstyled d-flex probootstrap-aside-social">
+            <li><a href="#" class="p-2"><span class="icon-twitter"></span></a></li>
+            <li><a href="#" class="p-2"><span class="icon-instagram"></span></a></li>
+            <li><a href="#" class="p-2"><span class="icon-dribbble"></span></a></li>
+          </ul>
+          <p>&copy; 2019 HeheVideo. <br> All Rights Reserved.</p>
+        </footer>
+      </div>
+    </aside>
+
+
+    <main role="main" class="probootstrap-main js-probootstrap-main">
+      <div class="probootstrap-bar">
+        <a href="#" class="probootstrap-toggle js-probootstrap-toggle"><span class="oi oi-menu"></span></a>
+        <div class="probootstrap-main-site-logo"><a href="index.html">Aside</a></a></div>
+      </div>
+      <div class="card-columns" >
+		<!-- video展示div -->
+
+      </div>  
+	<div class="tlinks">Collect from <a href="http://www.cssmoban.com/" >网页模板</a></div>
+
+      <div class="container-fluid d-md-none">
+        <div class="row">
+          <div class="col-md-12">
+            <ul class="list-unstyled d-flex probootstrap-aside-social">
+              <li><a href="#" class="p-2"><span class="icon-twitter"></span></a></li>
+              <li><a href="#" class="p-2"><span class="icon-instagram"></span></a></li>
+              <li><a href="#" class="p-2"><span class="icon-dribbble"></span></a></li>
+            </ul>
+            <p>&copy; 2019  HEHE Video <br> All Rights Reserved. Designed by hehe.</p>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    
+
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/imagesloaded.pkgd.min.js"></script>
+    <script src="js/imagesloaded.pkgd.min.js"></script>
+
+    <script src="js/main.js"></script>
+
+    
+  </body>
+</html>

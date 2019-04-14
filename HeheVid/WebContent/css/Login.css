@@ -1,0 +1,47 @@
+@charset "UTF-8";
+		body{
+			background-image:url('../images/login_bg.jpg');
+			background-repeat:round ;
+			background-size:100% auto;
+			background-attachment: fixed;
+		}
+		div{
+			text-align:center;
+			position:relative;
+			top:20px;
+			margin:15px;
+		}
+		.div_Change{
+			background-color:white;
+			width:300px;
+			height:400px;
+			opacity:0.8;
+			margin: auto;
+		}
+		.div_top{
+			background-color:rgb(68,135,174);
+			width:calc(100%);
+			height:calc(12.5%);
+			top:0px;
+			color:white;
+			margin:0px;
+		}
+		
+		input{
+			text-indent:10px;
+			border:1px solid rgb(68,135,174);
+			width:calc(70%);
+			height:25px; 
+			position:relative;
+			top:10px;
+			bottom:40px;
+		}
+		input[type=button]{
+			background-color:rgb(68,135,174);
+			text-indent:0px;
+			color:white;
+			width:80px;
+			padding:0px;
+			margin:0px;
+			cursor: pointer; 
+		}

@@ -1,0 +1,96 @@
+﻿<html>
+<head>
+	<meta http-equiv="Content-=Type" Content="text/html;charset = utf-8" />
+	<link href="../css/myvideo.css" rel="stylesheet">
+	<title>我的视频</title>
+</head>
+<body>
+	<div class="titleclass">
+		<span><a href="http://www.baidu.com" style="color:#1E90FF;text-decoration:none;">网站首页</a></span>
+		<div class="menuclass">
+		<a href="http://www.baidu.com">欢迎您来到呵呵短视频网站！</a>
+		<a href="http://www.baidu.com">你好你好你好你好</a>
+		<a href="http://www.baidu.com">你好你好</a>
+		<input type="text" placeholder="惊呆！北京一男子竟然......">
+		<a href="http:///www.baidu.com">搜索</a>
+		</div>
+	</div>
+	<div class="mystyle">
+		<div class="myclass">
+			<div class="image">
+				<img src="../images/one.jpg" style="width:70px;height:70px;">
+			</div>
+			<div class="personl">
+			<div class="image">视频上传</div>
+			<div class="image">我的视频</div>
+			<div class="image">个人信息1</div>
+			<div class="image">个人信息1</div>
+			</div>
+		</div>
+	</div>
+	<div class="contentclass">
+		<div class="newclass">
+			<div class="contenttitle">
+				<span class="fontstyle">我的视频</span>
+				<span class="span">请给我们网站一个五星好评吧💗</span>
+			</div>
+			<div class="video">
+				<div>
+					<img src="../images/one.jpg" style="width:70px;height:70px;">
+				</div>
+				<p>by。。。</p>
+				<div id="div_id">
+				
+				</div>
+				<input type="button" value="删除视频" onclick="delete()"/>
+				<a href="http://www.baidu.com">视频信息修改</a>
+			</div>
+		</div>
+		
+	</div>
+</body>
+
+
+<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+
+
+<script type="text/javascript">
+	$(function(){
+		Login();
+	});
+	function Login(){
+		
+		var url = '../myVideo';
+		var videoUrl;
+		$.ajax({
+		    type:"get",  //请求方式
+		    url: url,     //请求地址
+		    data: {"videoUrl":videoUrl},  //请求参数
+		    cache: false,   //去除缓存
+		    async : false,   //同步
+		    dataType: "JSON",
+		    success: function (data ,textStatus, jqXHR)
+		    {
+		    	viewList(data.data);
+		    
+		    },
+		    error:function (XMLHttpRequest, textStatus, errorThrown) {      
+		    	alert("失败！");
+		    }
+		 });
+	}
+	function viewList(data){
+		var html="";
+		var url="http://39.97.101.71/";
+		for(var i = 0; i < data.length; i++){
+			html += '<video width="420" height="320" controls><source src='+url + data[i]['videoUrl'] + '/></video>';
+
+						
+		}
+		$("#div_id").append(html);
+		
+	
+	}
+
+</script>
+</html>

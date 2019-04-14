@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 登录系统 </title>
+	<style type="text/css">
+		@import "css/Register.css";
+	</style>
+</head>
+<body>
+	<div class="div_Register">
+		<div class="div_top">
+			<div style="margin:auto 0;text-align:center;" >Welcome to HeheVideo registration</div>
+		</div>
+		<div id="necessary">
+			<div>
+				<font color="red">*</font>Your Account<br/>
+				<input type="text" id="Account" class="input" name="Account"/><br/><br/>
+			</div>
+			<div >
+				<font color="red">*</font>Your Password<br/>
+				<input type="password" id="Password" class="input" name="Password"/><br/><br/>
+			</div>
+			<div >
+				<font color="red">*</font>Confirm Pwd<br/>
+				<input type="password" id="Pwd" class="input"/><br/><br/>
+			</div>
+		</div>
+		<div id="unnecessary">
+			<br/>
+			<div>
+				<fieldset style="width:131px;">
+					<legend>Gender</legend>
+					<label style="font-size:small"><input type="radio" name="gender" checked/>Male</label>&nbsp&nbsp
+					<label style="font-size:small"><input type="radio" name="gender"/>Female</label>
+				</fieldset>
+			</div>
+			<div style="top:25px">
+				<label>Tel: <input type="text" id="Tel" name="Tel" class="input" pattern="\d{11}"/></label>
+			</div>
+			<br/>
+			<div style="top:12px">
+				<label>Birthday: <input type="date" id="date" style="text-indent:0px;"class="input" name="date" /></label>
+			</div>
+		</div>
+		<div id="Register">
+			<input style="width:80px;height:25px;" type="button" value="Register" onclick="Register()"/>
+		</div>
+	</div>
+</body>
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+<script>
+
+function Register(){
+	
+	var Account = $("#Account").val();
+	var Password = $("#Password").val();
+	var Pwd = $("#Pwd").val();
+	var radios = document.getElementsByName("gender");
+	var Tel = $("#Tel").val();
+	var date = $("#date").val();  
+	var gender = 0;
+	var url = 'Register';
+	if(Account==""||Password==""||Pwd=="")
+	{
+		alert("账号或密码为空！");
+		return ;
+	}
+	if(Password!=Pwd)
+	{
+		alert("两次密码不同，请重新输入！");
+		return ;
+	}
+	if(Tel!="")
+		if(!(/^[0-9]+$/.test(Tel))||Tel.length != 11||Tel.charAt(0) != 1)
+		{
+			alert("电话号码错误！");
+			return ;			
+		}
+	if(radios[0].checked==true) 
+	{
+		gender = 1;
+	}
+	$.ajax({
+	    type:"get",  //请求方式
+	    url: url,     //请求地址
+	    data: {"Account":Account,"Password":Password,"gender":gender,"Tel":Tel,"date":date},  //请求参数
+	    cache: false,   //去除缓存
+	    async : false,   //同步
+	    dataType: "JSON",
+	    success: function (data ,textStatus, jqXHR)
+	    {
+    		alert("账号注册成功！");
+    		window.location.href="Login.html";
+	    },
+	    error:function (XMLHttpRequest, textStatus, errorThrown) {      
+	      	//请求失败之后执行这个
+	    	alert("请求失败了");
+	    }
+	 });	
+	}
+</script>
+</html>

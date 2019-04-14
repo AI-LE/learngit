@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+<style>
+video{
+	width:180px;
+	height:280px; 
+}
+.div_video{
+	float:left;
+}
+</style>
+<script type="text/javascript">
+$(function(){
+	var url = 'ShowVideoServlet';//发送请求的地址 
+	
+	$.ajax({
+	    type:"get",  //请求方式，默认为get
+	    //timeout 要求为number类型参数，设置请求超时时间（毫秒）
+	    url: url,     //请求地址
+	    data: {"as":name},  //请求参数
+	    cache: false,   //去除缓存
+	    async : false,   //同步
+	    //async默认为true 所有请求均为异步，同步请求为false
+	// 	    dataType: "JSON",
+	    success: function (data ,textStatus, jqXHR)
+	    {
+	    	//请求成功之后，后台数据赋值给data参数
+	    	viewList(data.data);
+	    
+	    },
+	    error:function (XMLHttpRequest, textStatus, errorThrown) {      
+	      	//请求失败之后执行这个
+	    	alert("请求失败了");
+	    	alert(textStatus);
+	    	alert(errorThrown);
+	    }
+	 });
+	
+});
+
+//数据显示部分
+function viewList(data){
+	var url="http://39.97.101.71/";
+	var html = '';
+
+		for(var i = 0; i < data.length; i++){
+			html += '<div class="div_video">'
+			html += '<video controls><source id="'+data[i]['videoId']+'" src='+url + data[i]['videoUrl'] + '/></video>';
+			html += '<br/><span><b>'+data[i]['videoName']+'</b><br/>'+data[i]['videoInfo']+'</span>';
+			html += '</div>'
+		}
+	$('#div_content').empty().append(html);//数据绑定
+}
+</script>
+</head>
+<body>
+
+<div id="div_content">
+
+</div>
+
+
+</body>
+</html>
